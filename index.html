@@ -267,7 +267,14 @@ input[type="text"], input[type="email"], input[type="password"], textarea, selec
                 </div>
                 <input type="email" id="reg-email" placeholder="Email" required>
                 <input type="password" id="reg-password" placeholder="Κωδικός" required>
-                <button class="btn full" onclick="registerUser()">Δημιουργία Λογαριασμού / Σύνδεση</button>
+                <button class="btn full" onclick="registerUser()">Δημιουργία Λογαριασμού</button>
+            </div>
+
+            <div class="card" id="login-card" style="display:none; border-top: 4px solid var(--blue);">
+                <h2>Σύνδεση</h2>
+                <p>Καλώς ήρθατε ξανά, <b id="login-name"></b>. Πληκτρολογήστε τον κωδικό σας για να συνεχίσετε από όπου σταματήσατε.</p>
+                <input type="password" id="login-password" placeholder="Κωδικός">
+                <button class="btn full" onclick="loginUser()">Σύνδεση</button>
             </div>
 
             <div class="card" id="welcome-user-card" style="display:none; background: #f0f9ff; border-left: 4px solid var(--blue);">
@@ -304,9 +311,9 @@ input[type="text"], input[type="email"], input[type="password"], textarea, selec
         <!-- 1.1.2 Σκοπός (Πίνακας 2, Εικόνα 2) -->
         <section id="purpose" class="page">
             <div class="card">
-                <h2>1.1.2 Γιατί υπάρχει αυτό το μάθημα <span class="time-badge">5΄</span></h2>
+                <h2>1.1.2 Γιατί υπάρχει αυτό το μάθημα <span class="time-badge">3΄</span></h2>
                 <p>Τα εργαλεία τεχνητής νοημοσύνης μπήκαν στην καθημερινότητα του εκπαιδευτικού πιο γρήγορα από όσο προλάβαμε να συμφωνήσουμε πώς τα χρησιμοποιούμε. Φτιάχνουν φύλλα εργασίας σε δευτερόλεπτα, εξηγούν έννοιες, προτείνουν ασκήσεις.</p>
-                <p>Στα μαθηματικά όμως το διακύβευμα είναι διαφορετικό από ό,τι σε άλλα μαθήματα. Μια ανακρίβεια σε ένα κείμενο ιστορίας γίνεται αντιληπτή. Μια λύση εξίσωσης που «χάνει» τη μία από τις δύο ρίζες, με όλα τα βήματα σωστά και τη μορφοποίηση άψογη, δεν γίνεται. Και φτάνει στον μαθητή ως πρότυπο διαδικασίας.</p>
+                <p>Στα μαθηματικά όμως το διακύβευμα είναι διαφορετικό από ό,τι σε άλλα μαθήματα. Μια λύση εξίσωσης που δεν εμφανίζει τη μία από τις δύο ρίζες, με όλα τα βήματα σωστά και τη μορφοποίηση άψογη, δεν γίνεται εύκολα αντιληπτή. Και φτάνει στον μαθητή ως πρότυπο διαδικασίας.</p>
                 <p>Ο σκοπός αυτού του μαθήματος είναι πρακτικός: να σας δώσει δύο τυποποιημένα εργαλεία που θα χρησιμοποιείτε ξανά και ξανά.</p>
                 <ul>
                     <li>Μια <b>Ρουμπρίκα 3 κριτηρίων</b> για να αξιολογείτε ένα εργαλείο ΤΝ πριν το φέρετε στην τάξη σας.</li>
@@ -320,7 +327,7 @@ input[type="text"], input[type="email"], input[type="password"], textarea, selec
         <!-- 1.1.3 Μαθησιακά Αποτελέσματα (Πίνακας 3, Εικόνα 3) -->
         <section id="outcomes" class="page">
             <div class="card">
-                <h2>1.1.3 Τι θα μπορείτε να κάνετε στο τέλος <span class="time-badge">5΄</span></h2>
+                <h2>1.1.3 Τι θα μπορείτε να κάνετε στο τέλος <span class="time-badge">7΄</span></h2>
                 <p>Το μάθημα αναπτύσσει δύο ικανότητες, καθεμία σε ένα μικρο-μάθημα. Για κάθε ικανότητα υπάρχουν δύο μαθησιακά αποτελέσματα:</p>
 
                 <h4 style="margin-top:24px;">ΙΚΑΝΟΤΗΤΑ Α: Ανάπτυξη ικανότητας κριτικής αξιολόγησης εργαλείων τεχνητής νοημοσύνης για τη διδασκαλία μαθηματικών (Μικρο-Μάθημα 1)</h4>
@@ -344,7 +351,7 @@ input[type="text"], input[type="email"], input[type="password"], textarea, selec
         <!-- 1.1.4 Δομή (Πίνακας 4, Εικόνα 4) -->
         <section id="structure" class="page">
             <div class="card">
-                <h2>1.1.4 Πώς είναι οργανωμένο το μάθημα <span class="time-badge">5΄</span></h2>
+                <h2>1.1.4 Πώς είναι οργανωμένο το μάθημα <span class="time-badge">4΄</span></h2>
                 <p>Συνολική διάρκεια: 5 ώρες, με τον δικό σας ρυθμό. Μπορείτε να το κάνετε σε μία μέρα ή σε πέντε, η πρόοδός σας αποθηκεύεται.</p>
                 <div class="grid">
                     <div class="mini"><h4>1. Εγγραφή και Εισαγωγή <span class="time-badge">1 ώρα</span></h4><p>Τι θα μάθετε, τι χρειάζεστε, και μια πρώτη επαφή με τη θεματική.</p></div>
@@ -369,7 +376,7 @@ input[type="text"], input[type="email"], input[type="password"], textarea, selec
         <!-- 1.1.5 Άδεια (Πίνακας 5, Εικόνα 5) -->
         <section id="license" class="page">
             <div class="card">
-                <h2>1.1.5 Άδεια χρήσης του υλικού <span class="time-badge">3΄</span></h2>
+                <h2>1.1.5 Άδεια χρήσης του υλικού <span class="time-badge">2΄</span></h2>
                 <p>Το σύνολο του εκπαιδευτικού υλικού αυτού του μαθήματος διατίθεται ελεύθερα, με την ανοικτή άδεια <b>Creative Commons Αναφορά Δημιουργού 4.0 Διεθνές (CC BY 4.0)</b>.</p>
 
                 <h4>Μπορείτε ελεύθερα</h4>
@@ -406,7 +413,7 @@ input[type="text"], input[type="email"], input[type="password"], textarea, selec
         <!-- 1.2.1 Προαπαιτούμενες γνώσεις (Πίνακας 7, Εικόνα 7) -->
         <section id="prerequisites" class="page">
             <div class="card">
-                <h2>1.2.1 Τι χρειάζεται να ξέρετε ήδη <span class="time-badge">5΄</span></h2>
+                <h2>1.2.1 Τι χρειάζεται να ξέρετε ήδη <span class="time-badge">4΄</span></h2>
 
                 <h4>Απαραίτητα</h4>
                 <ul>
@@ -431,7 +438,7 @@ input[type="text"], input[type="email"], input[type="password"], textarea, selec
         <!-- 1.2.2 Τεχνικές υποδομές (Πίνακας 8, Εικόνα 8) — ΝΕΑ ΣΕΛΙΔΑ -->
         <section id="tech" class="page">
             <div class="card">
-                <h2>1.2.2 Τι χρειάζεστε τεχνικά <span class="time-badge">5΄</span></h2>
+                <h2>1.2.2 Τι χρειάζεστε τεχνικά <span class="time-badge">3΄</span></h2>
                 <ul>
                     <li>Υπολογιστή ή tablet με σύγχρονο πρόγραμμα περιήγησης στο διαδίκτυο (browser: Chrome, Firefox, Safari ή Edge, σε πρόσφατη έκδοση). Το υλικό λειτουργεί και σε κινητό, αλλά οι διαδραστικές δραστηριότητες είναι σχεδιασμένες για μεγαλύτερη οθόνη.</li>
                     <li>Σταθερή σύνδεση στο διαδίκτυο, κυρίως για το βίντεο.</li>
@@ -763,7 +770,7 @@ input[type="text"], input[type="email"], input[type="password"], textarea, selec
                         2. Ηλικιακά όρια των όρων χρήσης.<br>
                         3. Πού και γιατί γίνεται η επεξεργασία &mdash; χρησιμοποιούνται οι συνομιλίες για εκπαίδευση μοντέλου; Υπάρχει δυνατότητα εξαίρεσης;<br><br>
 
-                        <b>Παράδειγμα.</b> Η εφαρμογή exaskisi.ai (υποθετικό εργαλείο, κατασκευασμένο για τις ανάγκες του μαθήματος) ζητά λογαριασμό ανά μαθητή με ονοματεπώνυμο και email, και μεταφόρτωση φωτογραφιών των γραπτών τους. Στους όρους: ηλικιακό όριο 18 ετών.<br><br>
+                        <b>Παράδειγμα.</b> Η εφαρμογή taximath.ai (υποθετικό εργαλείο, κατασκευασμένο για τις ανάγκες του μαθήματος) ζητά λογαριασμό ανά μαθητή με ονοματεπώνυμο και email, και μεταφόρτωση φωτογραφιών των γραπτών τους. Στους όρους: ηλικιακό όριο 18 ετών.<br><br>
                         Αντίστοιχο καθημερινό παράδειγμα: θέλουμε να διορθώσουμε με ΤΝ φύλλο εργασίας μαθητή στο οποίο αναγράφονται ονοματεπώνυμο και αριθμός μητρώου. Η μεταφόρτωση χωρίς απαλοιφή των στοιχείων συνιστά διαβίβαση προσωπικών δεδομένων ανηλίκου σε τρίτο. Ανεξάρτητα από το πόσο καλά λύνει μαθηματικά, το εργαλείο απορρίπτεται.<br><br>
 
                         <b>Ο πρακτικός κανόνας.</b> Τα δεδομένα των μαθητών σας δεν είναι δικά σας να τα δώσετε. Αν μια χρήση απαιτεί προσωπικά δεδομένα ανηλίκων, χρειάζεται νομική βάση, ενημέρωση, συναινέσεις και έγκριση της σχολικής μονάδας.<br><br>
@@ -837,7 +844,7 @@ input[type="text"], input[type="email"], input[type="password"], textarea, selec
                 </div>
 
                 <div class="quiz-card">
-                    <p><b>Σενάριο 3.</b> Δωρεάν εφαρμογή υπόσχεται εξατομικευμένη εξάσκηση. Ζητά λογαριασμό για κάθε μαθητή με ονοματεπώνυμο, email και φωτογραφίες των γραπτών τους. Στους όρους διαβάζετε: «ελάχιστη ηλικία χρήστη: 18 έτη» και «τα δεδομένα ενδέχεται να χρησιμοποιηθούν για τη βελτίωση των υπηρεσιών μας». Ποιο κριτήριο ενεργοποιείται;</p>
+                    <p><b>Σενάριο 3.</b> Η δωρεάν εφαρμογή taximath.ai (υποθετικό εργαλείο) υπόσχεται εξατομικευμένη εξάσκηση. Ζητά λογαριασμό για κάθε μαθητή με ονοματεπώνυμο, email και φωτογραφίες των γραπτών τους. Στους όρους διαβάζετε: «ελάχιστη ηλικία χρήστη: 18 έτη» και «τα δεδομένα ενδέχεται να χρησιμοποιηθούν για τη βελτίωση των υπηρεσιών μας». Ποιο κριτήριο ενεργοποιείται;</p>
                     <div class="mcq">
                         <label><input type="radio" name="p1_3" onclick="quizWithHints(this,'fb_p1_3',false,'Δεν έχουμε καν δει πώς λύνει, δεν τίθεται ζήτημα ορθότητας με τα δεδομένα του σεναρίου.','Ε1: Κοιτάξτε τους όρους χρήσης: ποιον αφορούν τα δεδομένα που ζητούνται και ποιο είναι το όριο ηλικίας;','Ε2: Κάρτα Κ3 (δραστηριότητα 2.2), σημεία ελέγχου 1 και 2.')"> (α) Κ1 Μαθηματική ακρίβεια</label>
                         <label><input type="radio" name="p1_3" onclick="quizWithHints(this,'fb_p1_3',false,'Η υπόσχεση εξατομίκευσης ακούγεται διδακτικά ενδιαφέρουσα. Προσέξτε όμως τι ακριβώς ζητείται για να λειτουργήσει, και από ποιους.','Ε1: Ποιον αφορούν τα δεδομένα που ζητούνται και ποιο είναι το όριο ηλικίας;','Ε2: Κάρτα Κ3, σημεία ελέγχου 1 και 2.')"> (β) Κ2 Διδακτική καταλληλότητα</label>
@@ -1022,7 +1029,7 @@ input[type="text"], input[type="email"], input[type="password"], textarea, selec
                     <div class="snap-head"><span>ΣΤΙΓΜΙΟΤΥΠΟ Β</span><span>algeohelper.ai</span></div>
                     <div class="snap-body">
                         <div class="msg user">Χρήστης: Δεν καταλαβαίνω πώς λύνουμε τις εξισώσεις με γινόμενο. Είμαι στη Γ΄ Γυμνασίου.</div>
-                        <div class="msg ai">algeohelper.ai: Κανένα πρόβλημα! Ορίστε η πλήρης μέθοδος με ένα λυμένο παράδειγμα: [πλήρης μέθοδος και τρία λυμένα παραδείγματα, χωρίς καμία ερώτηση προς τον μαθητή]</div>
+                        <div class="msg ai">algeohelper.ai: Κανένα πρόβλημα! Ορίστε η πλήρης μέθοδος με λυμένα παραδείγματα: [πλήρης μέθοδος και τρία λυμένα παραδείγματα, χωρίς καμία ερώτηση προς τον μαθητή]</div>
                     </div>
                 </div>
 
@@ -1129,7 +1136,7 @@ input[type="text"], input[type="email"], input[type="password"], textarea, selec
             <div class="card">
                 <h2>2.6.3 Τεστ εξάσκησης για την τελική εξέταση <span class="time-badge">15΄</span></h2>
                 <p>Έξι νέα σενάρια, ίδιας μορφής με την τελική. Δεν βαθμολογείται, απεριόριστες προσπάθειες.</p>
-                <div class="notice plain" style="font-size:13px;"><b>Εργαλείο των σεναρίων:</b> algeohelper.ai. Είναι υποθετικό και έχει δημιουργηθεί για τις ανάγκες των ερωτήσεων.</div>
+                <div class="notice plain" style="font-size:13px;"><b>Εργαλείο των σεναρίων Ε1-Ε5:</b> algeohelper.ai. Στην Ε6 αξιολογείται το εργαλείο taximath.ai. Και τα δύο είναι υποθετικά και έχουν δημιουργηθεί για τις ανάγκες των ερωτήσεων.</div>
 
                 <div class="quiz-card">
                     <p><b>Ε1.</b> Η ΤΝ απαντά σε άσκηση ποσοστών: «Τιμή 80€ αυξήθηκε κατά 10% και στη συνέχεια μειώθηκε κατά 10%. Η τελική τιμή είναι ξανά 80€.» Ποιο κριτήριο παραβιάζεται;</p>
@@ -1186,7 +1193,7 @@ input[type="text"], input[type="email"], input[type="password"], textarea, selec
                 </div>
 
                 <div class="quiz-card">
-                    <p><b>Ε6.</b> Έχετε συμπληρωμένη ρουμπρίκα για το «AlgeBot»: Κ1 Πληροί, Κ2 Πληροί, Κ3 Δεν πληροί (όριο 18+ και συνομιλίες για εκπαίδευση χωρίς εξαίρεση). Ο διευθυντής ρωτά: «Το παίρνουμε;» Ποια απάντηση τεκμηριώνεται;</p>
+                    <p><b>Ε6.</b> Έχετε συμπληρωμένη ρουμπρίκα για το «taximath.ai»: Κ1 Πληροί, Κ2 Πληροί, Κ3 Δεν πληροί (όριο 18+ και συνομιλίες για εκπαίδευση χωρίς εξαίρεση). Ο διευθυντής ρωτά: «Το παίρνουμε;» Ποια απάντηση τεκμηριώνεται;</p>
                     <div class="mcq">
                         <label><input type="radio" name="pt1_6" onclick="showMCQFeedback(this,'fb_pt1_6',false,'Η ρουμπρίκα δεν βγάζει μέσο όρο: ένα «Δεν πληροί» στο Κ3 δεν αντισταθμίζεται από τα άλλα δύο.')"> (α) «Ναι, πληροί τα 2 από τα 3 κριτήρια»</label>
                         <label><input type="radio" name="pt1_6" onclick="showMCQFeedback(this,'fb_pt1_6',true,'Σωστά. Τα κριτήρια δεν αθροίζονται, διαβάζονται κατά περίπτωση χρήσης. Το Κ3 αποκλείει τη μαθητική χρήση, αλλά η χρήση από τον εκπαιδευτικό δεν εκθέτει δεδομένα μαθητών, και εκεί τα Κ1/Κ2 πληρούνται.')"> (β) «Μόνο ως εργαλείο του εκπαιδευτικού για προετοιμασία υλικού, όχι για απευθείας χρήση από μαθητές»</label>
@@ -1422,7 +1429,7 @@ input[type="text"], input[type="email"], input[type="password"], textarea, selec
                 <p><b>Θυμάστε το ερώτημα που αφήσαμε ανοιχτό;</b> Το φύλλο Β προήλθε από άρτια προτροπή 4Σ. Ήταν σωστό;</p>
 
                 <div class="snap">
-                    <div class="snap-head"><span>ΦΥΛΛΟ Β, ΑΣΚΗΣΗ 4</span><span>exaskisi.ai</span></div>
+                    <div class="snap-head"><span>ΦΥΛΛΟ Β, ΑΣΚΗΣΕΙΣ 4 ΚΑΙ 6</span><span>exaskisi.ai</span></div>
                     <div class="snap-body">
                         <p style="font-size:13px; margin:0;"><b>Εκφώνηση:</b> «Υποτείνουσα 25 cm, μία κάθετη 7 cm, βρείτε την άλλη.» &nbsp;<b>Λύση φύλλου:</b> 24 ✓</p>
                         <p style="font-size:13px; margin:8px 0 0;"><b>Εκφώνηση 6:</b> «Ορθογώνιο 24×7 cm, βρείτε τη διαγώνιό του.» &nbsp;<b>Λύση φύλλου:</b> 25 cm ✓</p>
@@ -1773,6 +1780,11 @@ input[type="text"], input[type="email"], input[type="password"], textarea, selec
                     <b>Προαιρετικά (δεν αξιολογείται):</b> προσαρμόστε την προτροπή στη δική σας τάξη και ενότητα.
                     <textarea id="synthCustom" rows="4" placeholder="Η δική σας εκδοχή..."></textarea>
                     <button class="btn light" onclick="savePlan('prompt')">Αποθήκευση στο Προσωπικό Σχέδιο Δράσης</button>
+                <div id="myPlanPanel" class="notice plain" style="display:none; margin-top:14px;">
+                    <h4 style="margin-top:0;">Το Προσωπικό Σχέδιο Δράσης μου</h4>
+                    <div id="myPlanContent" style="font-size:13px;"></div>
+                    <button class="btn light" onclick="printPlan()" style="margin-top:10px;">Εκτύπωση του Σχεδίου Δράσης</button>
+                </div>
                 </div>
 
                 <!-- ΜΕΡΟΣ Β -->
@@ -1891,7 +1903,7 @@ input[type="text"], input[type="email"], input[type="password"], textarea, selec
         <section id="mm2test" class="page">
             <div class="card">
                 <h2>3.6.3 Τεστ εξάσκησης για την τελική εξέταση <span class="time-badge">15΄</span></h2>
-                <div class="notice plain" style="font-size:13px;"><b>Εργαλείο των σεναρίων:</b> algeohelper.ai. Είναι υποθετικό και έχει δημιουργηθεί για τις ανάγκες των ερωτήσεων.</div>
+                <div class="notice plain" style="font-size:13px;"><b>Εργαλείο των σεναρίων με υλικό παραγόμενο από ΤΝ (Ε4-Ε6):</b> algeohelper.ai. Είναι υποθετικό και έχει δημιουργηθεί για τις ανάγκες των ερωτήσεων.</div>
 
                 <div class="quiz-card">
                     <p><b>Ε1.</b> Προτροπή: «Δημιούργησε επαναληπτικό 20 λεπτών στους μέσους όρους, με λυσάρι χωριστά». Τι λείπει ΚΥΡΙΩΣ;</p>
@@ -2016,11 +2028,7 @@ input[type="text"], input[type="email"], input[type="password"], textarea, selec
 
                 <button class="btn btn-complete" id="submitExamBtn" onclick="submitExam()">Υποβολή Απαντήσεων</button>
 
-                <details style="margin-top:26px; padding:14px; background:#f8fafc; border:1px solid var(--border); border-radius:8px;">
-                    <summary style="cursor:pointer; font-weight:700; color:var(--navy);">Εναλλακτική υλοποίηση: Google Forms</summary>
-                    <p style="margin-top:12px; font-size:13px;">Στο περιβάλλον διανομής η εξέταση υλοποιείται και ως Google Form σε λειτουργία quiz, με αυτόματη βαθμολόγηση και ανατροφοδότηση ανά επιλογή. Επικολλήστε εδώ τον κώδικα ενσωμάτωσης:</p>
-                    <div class="notice plain" style="font-size:13px;"><b>[ΘΕΣΗ ΓΙΑ GOOGLE FORM EMBED]</b><br>&lt;iframe src="https://docs.google.com/forms/d/e/.../viewform?embedded=true" width="100%" height="1200"&gt;&lt;/iframe&gt;</div>
-                </details>
+                
             </div>
         </section>
 
@@ -2376,8 +2384,16 @@ function quizWithHints(radio, fbId, isCorrect, mainMsg, hint1, hint2) {
 
 function checkRegistration() {
     const user = JSON.parse(localStorage.getItem('elearningUser'));
+    if (user && user.firstname && user.pwHash && sessionStorage.getItem('elearningLoggedIn') !== '1') {
+        document.getElementById('registration-card').style.display = 'none';
+        document.getElementById('welcome-user-card').style.display = 'none';
+        document.getElementById('login-card').style.display = 'block';
+        document.getElementById('login-name').textContent = user.firstname + ' ' + (user.lastname || '');
+        return;
+    }
     if (user && user.firstname) {
         document.getElementById('registration-card').style.display = 'none';
+        document.getElementById('login-card').style.display = 'none';
         document.getElementById('welcome-user-card').style.display = 'block';
         document.getElementById('display-username').textContent = user.firstname;
         completed['home'] = true;
@@ -2386,20 +2402,46 @@ function checkRegistration() {
     }
 }
 
-function registerUser() {
+async function hashPw(s) {
+    if (window.crypto && crypto.subtle && window.isSecureContext) {
+        const d = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(s));
+        return Array.from(new Uint8Array(d)).map(b => b.toString(16).padStart(2, '0')).join('');
+    }
+    let h = 5381;
+    for (let i = 0; i < s.length; i++) { h = ((h << 5) + h + s.charCodeAt(i)) >>> 0; }
+    return 'x' + h.toString(16);
+}
+async function registerUser() {
     const fn = document.getElementById('reg-firstname').value.trim();
     const ln = document.getElementById('reg-lastname').value.trim();
     const em = document.getElementById('reg-email').value.trim();
     const pw = document.getElementById('reg-password').value.trim();
     if (fn && ln && em && pw) {
-        localStorage.setItem('elearningUser', JSON.stringify({ firstname: fn, lastname: ln, email: em }));
+        const pwHash = await hashPw(pw);
+        localStorage.setItem('elearningUser', JSON.stringify({ firstname: fn, lastname: ln, email: em, pwHash: pwHash }));
+        sessionStorage.setItem('elearningLoggedIn', '1');
         checkRegistration();
     } else {
         alert('Παρακαλώ συμπληρώστε όλα τα πεδία.');
     }
 }
+async function loginUser() {
+    const user = JSON.parse(localStorage.getItem('elearningUser'));
+    const pw = document.getElementById('login-password').value;
+    if (!user) return;
+    const pwHash = await hashPw(pw);
+    if (!user.pwHash || pwHash === user.pwHash) {
+        sessionStorage.setItem('elearningLoggedIn', '1');
+        document.getElementById('login-password').value = '';
+        checkRegistration();
+    } else {
+        alert('Λάθος κωδικός. Δοκιμάστε ξανά.');
+    }
+}
 
 function logoutUser() {
+    sessionStorage.removeItem('elearningLoggedIn');
+    const lc = document.getElementById('login-card'); if (lc) lc.style.display = 'none';
     ['elearningUser','elearningCompleted','examResult','examAttempts','planActions']
         .forEach(k => localStorage.removeItem(k));
     ['forum_intro','forum_mm1','forum_mm2'].forEach(k => localStorage.removeItem(k));
@@ -2546,10 +2588,31 @@ function savePlan(key) {
     const plan = JSON.parse(localStorage.getItem('planActions') || '{}');
     plan[key] = val;
     localStorage.setItem('planActions', JSON.stringify(plan));
-    alert('Αποθηκεύτηκε στο Προσωπικό Σχέδιο Δράσης σας.');
-}
+            renderPlan();
+            alert('Αποθηκεύτηκε στο Προσωπικό Σχέδιο Δράσης σας. Εμφανίζεται παρακάτω, στο πάνελ «Το Προσωπικό Σχέδιο Δράσης μου».');
+        }
 
-/* ---------------------------- 3.3.2 DRAG & DROP ---------------------------- */
+function renderPlan() {
+            const panel = document.getElementById('myPlanPanel');
+            const box = document.getElementById('myPlanContent');
+            if (!panel || !box) return;
+            const plan = JSON.parse(localStorage.getItem('planActions') || '{}');
+            const labels = { prompt: 'Η προσαρμοσμένη προτροπή μου (δραστηριότητα 3.5.2)' };
+            const keys = Object.keys(plan);
+            if (keys.length === 0) { panel.style.display = 'none'; return; }
+            box.innerHTML = keys.map(k => '<p style="margin:6px 0;"><b>' + (labels[k] || k) + ':</b><br>' + String(plan[k]).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/\n/g,'<br>') + '</p>').join('');
+            panel.style.display = 'block';
+        }
+        function printPlan() {
+            const plan = JSON.parse(localStorage.getItem('planActions') || '{}');
+            const labels = { prompt: 'Η προσαρμοσμένη προτροπή μου (δραστηριότητα 3.5.2)' };
+            const body = Object.keys(plan).map(k => '<h3>' + (labels[k] || k) + '</h3><p>' + String(plan[k]).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/\n/g,'<br>') + '</p>').join('');
+            const w = window.open('', '_blank');
+            w.document.write('<html><head><title>Προσωπικό Σχέδιο Δράσης</title></head><body style="font-family:sans-serif; max-width:700px; margin:40px auto;"><h2>Προσωπικό Σχέδιο Δράσης</h2>' + (body || '<p>Δεν έχει αποθηκευτεί ακόμη περιεχόμενο.</p>') + '</body></html>');
+            w.document.close(); w.print();
+        }
+
+        /* ---------------------------- 3.3.2 DRAG & DROP ---------------------------- */
 
 const dndItems = [
     { id:'d1', zone:'s1', text:'«Είσαι έμπειρος εκπαιδευτικός μαθηματικών Γυμνασίου.»' },
@@ -2983,6 +3046,7 @@ window.onload = () => {
     loadForum('intro');
     loadForum('mm1');
     loadForum('mm2');
+    renderPlan();
     if (!document.querySelector('.page.active')) showPage('home');
 };
 </script>
