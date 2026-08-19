@@ -88,21 +88,12 @@ input[type="text"], input[type="email"], input[type="password"], textarea, selec
 .choice-row { margin: 10px 0 4px; }
 .choice-row .btn { background:#e2e8f0; color:var(--navy); box-shadow:none; }
 .choice-row .btn.picked { background:var(--green); color:#fff; box-shadow:0 2px 4px rgba(16,185,129,.25); }
-.refs p { padding-left:36px; text-indent:-36px; margin-bottom:14px; font-size:13.5px; line-height:1.6; }
-.refs h4 { margin:26px 0 12px; }
-.choice-note { font-size:13px; color:var(--muted); font-style:italic; margin:4px 0 12px; }
 
 /* Accordion */
 .accordion button { width: 100%; text-align: left; background: #f1f5f9; color: var(--navy); margin: 8px 0 0; padding: 16px; border: 1px solid var(--border); border-radius: 8px; cursor: pointer; font-weight: 700; font-size: 15px; }
 .accordion button:hover { background: #e2e8f0; }
 .acc-content { display: none; padding: 20px; border: 1px solid var(--border); border-top: 0; border-radius: 0 0 8px 8px; background: #fff; font-size: 14px; }
 .acc-content.open { display: block; animation: slideDown 0.3s; margin-bottom: 8px; }
-
-/* Step cards */
-.step { border: 1px solid var(--border); border-radius: 12px; padding: 20px; background: white; cursor: pointer; transition: all 0.2s; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
-.step:hover { border-color: var(--blue); transform: translateY(-2px); box-shadow: var(--hover-shadow); }
-.step .hidden { display: none; margin-top: 12px; color: #475569; font-size: 14px; border-top: 1px solid #e2e8f0; padding-top: 12px; }
-.step.open .hidden { display: block; animation: fadeIn 0.3s; }
 
 /* Time badge */
 .time-badge { display:inline-block; background:#e0f2fe; color:#0369a1; border:1px solid #bae6fd; font-size:12px; font-weight:700; padding:3px 10px; border-radius:20px; margin-left:10px; vertical-align:middle; }
@@ -122,6 +113,11 @@ input[type="text"], input[type="email"], input[type="password"], textarea, selec
 /* Utilities */
 .notice { padding: 16px 20px; border-left: 5px solid var(--yellow); background: #fef3c7; border-radius: 8px; margin: 20px 0; color: #92400e; font-weight: 500; }
 .notice.plain { background:#f8fafc; border:1px solid #e2e8f0; border-left:5px solid var(--navy); color:var(--text); }
+
+.step { border: 1px solid var(--border); border-radius: 12px; padding: 20px; background: white; cursor: pointer; transition: all 0.2s; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
+.step:hover { border-color: var(--blue); transform: translateY(-2px); box-shadow: var(--hover-shadow); }
+.step .hidden { display: none; margin-top: 12px; color: #475569; font-size: 14px; border-top: 1px solid #e2e8f0; padding-top: 12px; }
+.step.open .hidden { display: block; animation: fadeIn 0.3s; }
 
 @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 @keyframes slideDown { from { opacity: 0; max-height: 0; } to { opacity: 1; max-height: 3000px; } }
@@ -149,6 +145,8 @@ input[type="text"], input[type="email"], input[type="password"], textarea, selec
     </div>
 
     <div class="content">
+
+        <!-- ========================= ΜΕΡΟΣ 1: ΕΓΓΡΑΦΗ ΚΑΙ ΕΙΣΑΓΩΓΗ (60΄) ========================= -->
         <section id="home" class="page active">
             <div class="hero">
                 <h2>Ανάπτυξη δεξιοτήτων αξιοποίησης εργαλείων Τεχνητής Νοημοσύνης στη διδασκαλία των Μαθηματικών</h2>
@@ -174,23 +172,24 @@ input[type="text"], input[type="email"], input[type="password"], textarea, selec
             </div>
         </section>
 
+        <!-- 1.1.1 Καλωσόρισμα (Πίνακας 1, Εικόνα 1) -->
         <section id="welcome" class="page">
-            <div class="card">
-                <h2>1.1.1 Καλωσόρισμα <span class="time-badge">5΄</span></h2>
-                <div style="width:100%; background:#000; border-radius:12px; margin-bottom:20px; text-align:center; overflow:hidden;">
-                    <video controls style="width:100%; max-height:400px; display:block;">
-                        <source src="kalosorisma.mp4" type="video/mp4">
-                        Το πρόγραμμα περιήγησής σας δεν υποστηρίζει την αναπαραγωγή βίντεο.
-                    </video>
-                    <div style="padding:8px 0; color:#fff;">
-                        <small style="opacity:.6">Καλωσόρισμα</small>
-                    </div>
-                </div>
-                <p>Καλώς ήρθατε στο μάθημα "Ανάπτυξη δεξιοτήτων αξιοποίησης εργαλείων τεχνητής νοημοσύνης στη διδασκαλία των μαθηματικών".</p>
-                <p>Το περιεχόμενο του μαθήματος βρίσκεται στο αρχείο <code>index_4.html</code>. Για να εμφανιστεί πλήρως, εκτελέστε το αρχείο αυτό ή επικοινωνήστε με την δημιουργό.</p>
-                <button class="btn btn-complete" onclick="completePage('welcome')">Ολοκλήρωσα τη δραστηριότητα</button>
-            </div>
-        </section>
+<div class="card">
+<h2>1.1.1 Καλωσόρισμα <span class="time-badge">5΄</span></h2>
+<div style="width:100%; background:#000; border-radius:12px; margin-bottom:20px; text-align:center; overflow:hidden;">
+<video controls style="width:100%; max-height:400px; display:block;">
+<source src="kalosorisma.mp4" type="video/mp4">
+Το πρόγραμμα περιήγησής σας δεν υποστηρίζει την αναπαραγωγή βίντεο.
+</video>
+<div style="padding:8px 0; color:#fff;">
+<small style="opacity:.6">Καλωσόρισμα</small>
+</div>
+</div>
+<p>Καλώς ήρθατε στο μάθημα "Ανάπτυξη δεξιοτήτων αξιοποίησης εργαλείων τεχνητής νοημοσύνης στη διδασκαλία των μαθηματικών".</p>
+<p><strong>Για το πλήρες περιεχόμενο του μαθήματος (3000+ γραμμές κώδικα), ανατρέξτε στο αρχείο <code>index_4.html</code>.</strong></p>
+<button class="btn btn-complete" onclick="completePage('welcome')">Ολοκλήρωσα τη δραστηριότητα</button>
+</div>
+</section>
     </div>
 </main>
 
