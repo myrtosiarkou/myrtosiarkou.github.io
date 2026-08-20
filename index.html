@@ -258,29 +258,74 @@ input[type="text"], input[type="email"], input[type="password"], textarea, selec
                 <p>Για εν ενεργεία εκπαιδευτικούς Μαθηματικών Γυμνασίου. Πλήρως ασύγχρονο, με το δικό σας ρυθμό.</p>
             </div>
 
-            <div class="card" id="registration-card" style="border-top: 4px solid var(--blue);">
+            <div class="card" id="auth-loading" style="border-top: 4px solid var(--blue);">
                 <h2>Εγγραφή &amp; Σύνδεση</h2>
-                <p>Συμπληρώστε τα στοιχεία σας για να ξεκινήσετε. Η πρόοδός σας αποθηκεύεται τοπικά στον υπολογιστή σας και μπορείτε να συνεχίσετε από όπου σταματήσατε.</p>
+                <p>Έλεγχος σύνδεσης…</p>
+            </div>
+
+            <div class="card" id="registration-card" style="display:none; border-top: 4px solid var(--blue);">
+                <h2>Δημιουργία λογαριασμού</h2>
+                <p>Συμπληρώστε τα στοιχεία σας για να ξεκινήσετε. Ο λογαριασμός σας είναι προσωπικός, μπορείτε να συνδεθείτε από οποιονδήποτε υπολογιστή και να συνεχίσετε από εκεί που σταματήσατε.</p>
                 <div class="form-row">
                     <div><input type="text" id="reg-firstname" placeholder="Όνομα" required></div>
                     <div><input type="text" id="reg-lastname" placeholder="Επώνυμο" required></div>
                 </div>
-                <input type="email" id="reg-email" placeholder="Email" required>
-                <input type="password" id="reg-password" placeholder="Κωδικός" required>
-                <button class="btn full" onclick="registerUser()">Δημιουργία Λογαριασμού</button>
+                <input type="email" id="reg-email" placeholder="Email" required autocomplete="email">
+                <input type="password" id="reg-password" placeholder="Κωδικός (τουλάχιστον 6 χαρακτήρες)" required autocomplete="new-password">
+                <button class="btn full" id="reg-btn" onclick="registerUser()">Δημιουργία Λογαριασμού</button>
+                <div style="display:flex; align-items:center; gap:10px; margin:18px 0 10px; color:var(--muted); font-size:12px; font-weight:700;">
+                    <span style="flex:1; height:1px; background:var(--border);"></span>ή<span style="flex:1; height:1px; background:var(--border);"></span>
+                </div>
+                <button class="btn full light" onclick="signInWithGoogle()" style="display:flex; align-items:center; justify-content:center; gap:10px;">
+                    <svg width="18" height="18" viewBox="0 0 48 48" aria-hidden="true" style="flex:none;">
+                        <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
+                        <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/>
+                        <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/>
+                        <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/>
+                    </svg>
+                    <span id="gbtn-reg">Συνέχεια με λογαριασμό Google</span>
+                </button>
+                <div id="reg-msg" class="feedback"></div>
+                <p style="font-size:13px; margin-top:14px;">Έχετε ήδη λογαριασμό; <a href="#" onclick="showAuthCard('login'); return false;">Σύνδεση</a></p>
+                <p style="font-size:12px; color:var(--muted);"><i>Το ονοματεπώνυμο και το email σας τηρούνται στην υπηρεσία ταυτοποίησης της Google (Firebase Authentication), αποκλειστικά για τη σύνδεσή σας στο μάθημα και για την έκδοση του πιστοποιητικού. Αν επιλέξετε σύνδεση με λογαριασμό Google, λαμβάνουμε από αυτόν μόνο το όνομα και τη διεύθυνση email σας. Ο κωδικός σας δεν είναι ορατός σε κανέναν, ούτε στη δημιουργό του μαθήματος.</i></p>
             </div>
 
             <div class="card" id="login-card" style="display:none; border-top: 4px solid var(--blue);">
                 <h2>Σύνδεση</h2>
-                <p>Καλώς ήρθατε ξανά, <b id="login-name"></b>. Πληκτρολογήστε τον κωδικό σας για να συνεχίσετε από όπου σταματήσατε.</p>
-                <input type="password" id="login-password" placeholder="Κωδικός">
-                <button class="btn full" onclick="loginUser()">Σύνδεση</button>
+                <p>Καλώς ήρθατε ξανά. Συνδεθείτε με το email και τον κωδικό σας για να συνεχίσετε από εκεί που σταματήσατε.</p>
+                <input type="email" id="login-email" placeholder="Email" autocomplete="email">
+                <input type="password" id="login-password" placeholder="Κωδικός" autocomplete="current-password">
+                <button class="btn full" id="login-btn" onclick="loginUser()">Σύνδεση</button>
+                <div style="display:flex; align-items:center; gap:10px; margin:18px 0 10px; color:var(--muted); font-size:12px; font-weight:700;">
+                    <span style="flex:1; height:1px; background:var(--border);"></span>ή<span style="flex:1; height:1px; background:var(--border);"></span>
+                </div>
+                <button class="btn full light" onclick="signInWithGoogle()" style="display:flex; align-items:center; justify-content:center; gap:10px;">
+                    <svg width="18" height="18" viewBox="0 0 48 48" aria-hidden="true" style="flex:none;">
+                        <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
+                        <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/>
+                        <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/>
+                        <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/>
+                    </svg>
+                    <span id="gbtn-login">Σύνδεση με λογαριασμό Google</span>
+                </button>
+                <div id="login-msg" class="feedback"></div>
+                <p style="font-size:13px; margin-top:14px;">
+                    <a href="#" onclick="resetPassword(); return false;">Ξέχασα τον κωδικό μου</a> &nbsp;|&nbsp;
+                    <a href="#" onclick="showAuthCard('register'); return false;">Δεν έχω λογαριασμό</a>
+                </p>
             </div>
 
             <div class="card" id="welcome-user-card" style="display:none; background: #f0f9ff; border-left: 4px solid var(--blue);">
                 <h2>Καλώς ήρθες, <span id="display-username" style="color: var(--blue);"></span></h2>
                 <p>Είσαι συνδεδεμένος. Μπορείς τώρα να συνεχίσεις το μάθημα από το μενού στα αριστερά.</p>
-                <button class="btn light" onclick="logoutUser()" style="margin-top: 15px;">Αποσύνδεση / Νέα εγγραφή (Μηδενισμός Προόδου)</button>
+                <p style="font-size:13px; color:var(--muted);">Λογαριασμός: <span id="display-email"></span></p>
+                <button class="btn light" onclick="logoutUser()" style="margin-top: 15px;">Αποσύνδεση</button>
+                <button class="btn danger" onclick="resetProgress()" style="margin-top: 15px;">Μηδενισμός προόδου</button>
+            </div>
+
+            <div class="card" id="auth-offline" style="display:none; border-top: 4px solid var(--danger);">
+                <h2>Απαιτείται σύνδεση στο διαδίκτυο</h2>
+                <p>Η εγγραφή και η σύνδεση στο μάθημα γίνονται μέσω διακομιστή. Ελέγξτε τη σύνδεσή σας στο διαδίκτυο και ανανεώστε τη σελίδα.</p>
             </div>
         </section>
 
@@ -608,7 +653,7 @@ input[type="text"], input[type="email"], input[type="password"], textarea, selec
                     • Μπορείτε να διαγράψετε τη δική σας ανάρτηση όποτε θέλετε, με το κουμπί «Διαγραφή».<br>
                     • Μην αναφέρετε ονόματα μαθητών ή στοιχεία που ταυτοποιούν το σχολείο σας.
                 </div>
-                <p style="font-size:12px; color:var(--muted); margin-top:10px;"><i>.</i></p>
+                <p style="font-size:12px; color:var(--muted); margin-top:10px;"><i>Στο περιβάλλον διανομής (Google Classroom) η δραστηριότητα υλοποιείται ως Discussion Forum. Εδώ παρουσιάζεται λειτουργική προσομοίωση.</i></p>
 
                 <button class="btn btn-complete" onclick="completePage('forum')">Ολοκλήρωσα τη δραστηριότητα</button>
             </div>
@@ -705,7 +750,7 @@ input[type="text"], input[type="email"], input[type="password"], textarea, selec
                     <li class="here"><b>Εισαγωγή</b> <span class="time-badge">5΄</span> &mdash; εδώ είστε</li>
                     <li><b>Παρουσίαση εννοιών</b> <span class="time-badge">15΄</span> &mdash; γιατί η ΤΝ κάνει λάθη στα μαθηματικά και ποια είναι τα 3 κριτήρια</li>
                     <li><b>Εξάσκηση κατανόησης</b> <span class="time-badge">15΄</span> &mdash; 3 σενάρια, αναγνωρίζετε ποιο κριτήριο αφορά το καθένα</li>
-                    <li><b>Επίδειξη δεξιότητας</b> <span class="time-badge">15΄</span> &mdash; οδηγός όπου αξιολογώ ένα εργαλείο βήμα βήμα, και η εκτυπώσιμη ρουμπρίκα σας</li>
+                    <li><b>Επίδειξη δεξιότητας</b> <span class="time-badge">15΄</span> &mdash; οδηγός όπου αξιολογώ ένα εργαλείο βήμα-βήμα, και η εκτυπώσιμη ρουμπρίκα σας</li>
                     <li><b>Εξάσκηση εφαρμογής</b> <span class="time-badge">15΄</span> &mdash; εφαρμόζετε εσείς τη ρουμπρίκα σε φάκελο αξιολόγησης</li>
                     <li><b>Ανακεφαλαίωση, αναστοχασμός, εξάσκηση για την τελική</b> <span class="time-badge">25΄</span></li>
                 </ol>
@@ -749,9 +794,9 @@ input[type="text"], input[type="email"], input[type="password"], textarea, selec
                     <button onclick="toggleAcc(this)">Κ1, ΜΑΘΗΜΑΤΙΚΗ ΑΚΡΙΒΕΙΑ, «Είναι σωστά τα μαθηματικά;»</button>
                     <div class="acc-content">
                         <b>Σημεία ελέγχου</b><br>
-                        1. Ορθότητα πράξεων --> κάνω ο ίδιος τις πράξεις.<br>
+                        1. Ορθότητα πράξεων &mdash; κάνω ο ίδιος τις πράξεις.<br>
                         2. Εγκυρότητα κάθε ενδιάμεσου βήματος.<br>
-                        3. Πληρότητα λύσεων --> βρέθηκαν όλες οι λύσεις;<br><br>
+                        3. Πληρότητα λύσεων &mdash; βρέθηκαν όλες οι λύσεις;<br><br>
 
                         <b>Παράδειγμα.</b> Στην εξίσωση x² = 25 η ΤΝ απαντά x = 5. Λείπει το −5. Κάθε βήμα που εμφανίζεται είναι σωστό, το λάθος είναι αυτό που ΔΕΝ βλέπω.<br><br>
 
@@ -763,7 +808,7 @@ input[type="text"], input[type="email"], input[type="password"], textarea, selec
                         <b>Σημεία ελέγχου</b><br>
                         1. Συμβατότητα με το ΠΣ και τη διδαγμένη ύλη τη δεδομένη στιγμή.<br>
                         2. Γλώσσα και συμβολισμός.<br>
-                        3. Παιδαγωγική στάση: καθοδηγεί ή απλώς δίνει έτοιμη την λύση;<br><br>
+                        3. Παιδαγωγική στάση &mdash; καθοδηγεί ή σερβίρει έτοιμη λύση;<br><br>
 
                         <b>Παράδειγμα.</b> Διδάσκετε παραγοντοποίηση. Η ΤΝ λύνει την x² − 5x = 0 με διακρίνουσα. Σωστή λύση, αλλά δεν έχει διδαχθεί. Το υλικό παρακάμπτει τον στόχο.<br><br>
 
@@ -776,7 +821,7 @@ input[type="text"], input[type="email"], input[type="password"], textarea, selec
                         <b>Σημεία ελέγχου</b><br>
                         1. Ποια δεδομένα ζητά και από ποιον (ονόματα, email, γραπτά).<br>
                         2. Ηλικιακά όρια των όρων χρήσης.<br>
-                        3. Πού και γιατί γίνεται η επεξεργασία --> χρησιμοποιούνται οι συνομιλίες για εκπαίδευση μοντέλου; Υπάρχει δυνατότητα εξαίρεσης;<br><br>
+                        3. Πού και γιατί γίνεται η επεξεργασία &mdash; χρησιμοποιούνται οι συνομιλίες για εκπαίδευση μοντέλου; Υπάρχει δυνατότητα εξαίρεσης;<br><br>
 
                         <b>Παράδειγμα.</b> Η εφαρμογή taximath.ai (υποθετικό εργαλείο, κατασκευασμένο για τις ανάγκες του μαθήματος) ζητά λογαριασμό ανά μαθητή με ονοματεπώνυμο και email, και μεταφόρτωση φωτογραφιών των γραπτών τους. Στους όρους: ηλικιακό όριο 18 ετών.<br><br>
                         Αντίστοιχο καθημερινό παράδειγμα: θέλουμε να διορθώσουμε με ΤΝ φύλλο εργασίας μαθητή στο οποίο αναγράφονται ονοματεπώνυμο και αριθμός μητρώου. Η μεταφόρτωση χωρίς απαλοιφή των στοιχείων συνιστά διαβίβαση προσωπικών δεδομένων ανηλίκου σε τρίτο. Ανεξάρτητα από το πόσο καλά λύνει μαθηματικά, το εργαλείο απορρίπτεται.<br><br>
@@ -1118,7 +1163,7 @@ input[type="text"], input[type="email"], input[type="password"], textarea, selec
                 </div>
 
                 <h3 style="margin-top:26px;">Και ένας κανόνας</h3>
-                <div class="notice"><b>Η απόφαση προκύπτει από τα ευρήματα.</b> Αν δεν μπορώ να γράψω συγκεκριμένο εύρημα, δεν έχω αξιολογήσει επαρκώς.</div>
+                <div class="notice"><b>Η απόφαση προκύπτει από τα ευρήματα.</b> Αν δεν μπορώ να γράψω συγκεκριμένο εύρημα, δεν έχω αξιολογήσει &mdash; έχω απλώς εντυπωσιαστεί.</div>
 
                 <button class="btn btn-complete" onclick="completePage('mm1recap')">Ολοκλήρωσα τη δραστηριότητα</button>
             </div>
@@ -1169,7 +1214,7 @@ input[type="text"], input[type="email"], input[type="password"], textarea, selec
                     <p><b>Ε2.</b> Σε φάση που διδάσκεται η πρόσθεση κλασμάτων με ΕΚΠ, η ΤΝ λύνει: «1/4 + 1/5 = 0,25 + 0,20 = 0,45».</p>
                     <div class="mcq">
                         <label><input type="radio" name="pt1_2" onclick="showMCQFeedback(this,'fb_pt1_2',false,'Οι πράξεις και το αποτέλεσμα είναι σωστά.')"> (α) Κ1 Μαθηματική ακρίβεια</label>
-                        <label><input type="radio" name="pt1_2" onclick="showMCQFeedback(this,'fb_pt1_2',true,'Σωστά (Κ2). Το αποτέλεσμα είναι αριθμητικά ορθό, αλλά η μέθοδος παρακάμπτει τον διδακτικό στόχο (ΕΚΠ, ομώνυμα κλάσματα) και δεν γενικεύεται, δοκιμάστε το ίδιο με 1/3.')"> (β) Κ2 Διδακτική καταλληλότητα</label>
+                        <label><input type="radio" name="pt1_2" onclick="showMCQFeedback(this,'fb_pt1_2',true,'Σωστά (Κ2). Το αποτέλεσμα είναι αριθμητικά ορθό, αλλά η μέθοδος παρακάμπτει τον διδακτικό στόχο (ΕΚΠ, ομώνυμα κλάσματα) και δεν γενικεύεται &mdash; δοκιμάστε το ίδιο με 1/3.')"> (β) Κ2 Διδακτική καταλληλότητα</label>
                         <label><input type="radio" name="pt1_2" onclick="showMCQFeedback(this,'fb_pt1_2',false,'Κανένα ζήτημα δεδομένων.')"> (γ) Κ3 Ασφάλεια &amp; δεδομένα</label>
                         <label><input type="radio" name="pt1_2" onclick="showMCQFeedback(this,'fb_pt1_2',false,'Ποιον στόχο υπηρετεί η ενότητα και ποιον δρόμο δείχνει η ΤΝ;')"> (δ) Κανένα</label>
                     </div>
@@ -1233,7 +1278,7 @@ input[type="text"], input[type="email"], input[type="password"], textarea, selec
             </div>
 
             <div class="card">
-                <h2>3.1.1 Αφόρμηση: Πρόχειρη ή δομημένη προτροπή; <span class="time-badge">3΄</span></h2>
+                <h2>3.1.1 Αφόρμηση &mdash; Πρόχειρη ή δομημένη προτροπή; <span class="time-badge">3΄</span></h2>
                 <p>Δύο φύλλα εργασίας, από το ίδιο εργαλείο, την ίδια στιγμή. Άλλαξε μόνο η προτροπή.</p>
 
                 <div class="snap">
@@ -1362,7 +1407,7 @@ input[type="text"], input[type="email"], input[type="password"], textarea, selec
                     <div class="acc-content">
                         <b>Ορισμός.</b> Δηλώνω σε ποιον ρόλο θέλω να απαντήσει το εργαλείο.<br><br>
                         <b>Καλό παράδειγμα:</b> «Είσαι έμπειρος εκπαιδευτικός μαθηματικών Γυμνασίου.»<br>
-                        <b>Κακό παράδειγμα:</b> «Είσαι μαθηματικός.»  ποιας βαθμίδας; με ποιο κοινό;<br><br>
+                        <b>Κακό παράδειγμα:</b> «Είσαι μαθηματικός.» &mdash; ποιας βαθμίδας; με ποιο κοινό;<br><br>
                         <b>Τι προλαμβάνει:</b> ύφος ακατάλληλο για την ηλικία, πανεπιστημιακή ορολογία, συμβολισμούς ανώτερης βαθμίδας.<br><br>
                         <b>Προσοχή:</b> ο ρόλος <u>δεν</u> κάνει την ΤΝ πιο ακριβή στα μαθηματικά. Ρυθμίζει μόνο το <i>πώς</i> μιλά, όχι το <i>τι</i> υπολογίζει.
 
@@ -1378,10 +1423,10 @@ input[type="text"], input[type="email"], input[type="password"], textarea, selec
 
                     <button onclick="toggleAcc(this)">Σ2, ΠΛΑΙΣΙΟ, «Για ποιους και σε ποια ύλη;»</button>
                     <div class="acc-content">
-                        <b>Ορισμός.</b> Δηλώνω τάξη, ενότητα και τη <u>φάση</u> της ύλης: τι έχει διδαχθεί και τι όχι μέχρι την δεδομένη στιγμή.<br><br>
+                        <b>Ορισμός.</b> Δηλώνω τάξη, ενότητα και &mdash; κρίσιμο &mdash; τη <u>φάση</u> της ύλης: τι έχει διδαχθεί και τι όχι.<br><br>
                         <b>Καλό παράδειγμα:</b> «Τάξη Β΄ Γυμνασίου, Πυθαγόρειο. Έχουν διδαχθεί την εφαρμογή, ΔΕΝ έχουν διδαχθεί ομοιότητα.»<br>
-                        <b>Κακό παράδειγμα:</b> «Για μαθητές Γυμνασίου.» --> δεν δηλώνει ούτε τάξη ούτε φάση ύλης.<br><br>
-                        <b>Τι προλαμβάνει:</b> υλικό εκτός ύλης ή, συχνότερα, <i>εκτός φάσης</i> --> σωστό μαθηματικά, λάθος για σήμερα.<br><br>
+                        <b>Κακό παράδειγμα:</b> «Για μαθητές Γυμνασίου.» &mdash; δεν δηλώνει ούτε τάξη ούτε φάση ύλης.<br><br>
+                        <b>Τι προλαμβάνει:</b> υλικό εκτός ύλης ή, συχνότερα, <i>εκτός φάσης</i> &mdash; σωστό μαθηματικά, λάθος για σήμερα.<br><br>
                         Το Σ2 καθορίζει και τη φύση των μεγεθών που θα εμφανιστούν στα προβλήματα: αν δεν δηλωθεί ότι οι μαθητές δεν έχουν διδαχθεί άρρητους, θα λάβετε ρίζες μη τελείων τετραγώνων (Verschaffel et al., 2020).<br><br>
                         <div class="notice"><b>Το Σ2 είναι η προληπτική εκδοχή του Κ2.</b> Ό,τι στο ΜΜ1 ελέγχατε <i>εκ των υστέρων</i> ως διδακτική καταλληλότητα, εδώ το δηλώνετε <i>εκ των προτέρων</i>.</div>
 
@@ -1399,7 +1444,7 @@ input[type="text"], input[type="email"], input[type="password"], textarea, selec
                     <div class="acc-content">
                         <b>Ορισμός.</b> Δηλώνω το παραδοτέο με μετρήσιμα χαρακτηριστικά: πλήθος, τύπους, κατανομή δυσκολίας.<br><br>
                         <b>Καλό παράδειγμα:</b> «6 ασκήσεις κλιμακούμενης δυσκολίας: 2 άμεσης εφαρμογής, 2 με ζητούμενη κάθετη πλευρά, 1 πρόβλημα καθημερινής ζωής, 1 σύνθετη.»<br>
-                        <b>Κακό παράδειγμα:</b> «Φτιάξε ασκήσεις.»  πόσες; τι τύπου; τι δυσκολίας;<br><br>
+                        <b>Κακό παράδειγμα:</b> «Φτιάξε ασκήσεις.» &mdash; πόσες; τι τύπου; τι δυσκολίας;<br><br>
                         <b>Τι προλαμβάνει:</b> μονότονο ή τυχαίο υλικό, την ίδια άσκηση με άλλους αριθμούς, όπως στο φύλλο Α (Lo, 2023).<br><br>
                         <b>Πρακτικός κανόνας:</b> αν δεν μπορείτε να προβλέψετε τι θα σας δώσει, το Σ3 είναι ελλιπές.
 
@@ -1417,7 +1462,7 @@ input[type="text"], input[type="email"], input[type="password"], textarea, selec
                     <div class="acc-content">
                         <b>Ορισμός.</b> Δηλώνω τη μορφή του παραδοτέου και τους περιορισμούς περιεχομένου.<br><br>
                         <b>Καλό παράδειγμα:</b> «Εκφωνήσεις πρώτα, λυσάρι σε χωριστή ενότητα στο τέλος. Όλα τα δεδομένα ακέραια και συμβατά μεταξύ τους (πυθαγόρειες τριάδες). Όλα εντός της διδαγμένης ύλης.»<br>
-                        <b>Κακό παράδειγμα:</b> «Γράψε και τις λύσεις.»  πού; ανακατεμένες με τις εκφωνήσεις;<br><br>
+                        <b>Κακό παράδειγμα:</b> «Γράψε και τις λύσεις.» &mdash; πού; ανακατεμένες με τις εκφωνήσεις;<br><br>
                         <b>Τι προλαμβάνει:</b> ασύμβατα αριθμητικά δεδομένα (όπως το αδύνατο τρίγωνο 5-12-18), λυσάρι μπλεγμένο με τις εκφωνήσεις, «άβολους» αριθμούς.
 
                         <div class="quiz-card">
@@ -1521,7 +1566,7 @@ input[type="text"], input[type="email"], input[type="password"], textarea, selec
                 </div>
 
                 <h3 style="margin-top:30px;">Μέρος Β: Ταξινόμηση συστατικών</h3>
-                <p>Σύρετε κάθε τμήμα προτροπής στη ζώνη στην οποία ανήκει. <b>Προσοχή:</b> δύο από αυτά δεν ανήκουν πουθενά, είναι διατυπώσεις που μοιάζουν χρήσιμες αλλά δεν προσδιορίζουν τίποτα.</p>
+                <p>Σύρετε κάθε τμήμα προτροπής στη ζώνη στην οποία ανήκει. <b>Προσοχή:</b> δύο από αυτά δεν ανήκουν πουθενά &mdash; είναι διατυπώσεις που μοιάζουν χρήσιμες αλλά δεν προσδιορίζουν τίποτα.</p>
 
                 <div class="dnd-container">
                     <div class="draggables-area" id="dnd-pool" ondragover="dndOver(event)" ondrop="dndDropBack(event)">
@@ -2114,7 +2159,7 @@ input[type="text"], input[type="email"], input[type="password"], textarea, selec
                 <div class="grid">
                     <div class="mini"><h4>Τη Ρουμπρίκα 3Κ</h4><p>Για να μη μπαίνει τίποτα στην τάξη σας χωρίς να το έχετε κρίνει: μαθηματική ακρίβεια, διδακτική καταλληλότητα, ασφάλεια των δεδομένων των μαθητών σας.</p></div>
                     <div class="mini"><h4>Το Πρωτόκολλο 4Β</h4><p>Για να μη φεύγει τίποτα από τα χέρια σας χωρίς να το έχετε επαληθεύσει: λύνω, ελέγχω ύλη, ελέγχω δεδομένα, διασταυρώνω λυσάρι.</p></div>
-                    <div class="mini"><h4>Τη συνήθεια</h4><p>Να ζητάτε στοιχεία από το εργαλείο και από τον εαυτό σας.</p></div>
+                    <div class="mini"><h4>Τη συνήθεια</h4><p>Να ζητάτε στοιχεία &mdash; από το εργαλείο και από τον εαυτό σας.</p></div>
                 </div>
 
                 <h4>Τρεις προτάσεις για τη συνέχεια</h4>
@@ -2302,6 +2347,7 @@ function updateProgress() {
     document.getElementById('progressBar').style.width = pct + '%';
     document.getElementById('progressText').textContent = pct + '%';
     buildSidebar();
+    if (typeof CURRENT_UID !== 'undefined' && CURRENT_UID) stashProgress(CURRENT_UID);
 }
 
 function showPage(id) {
@@ -2410,78 +2456,189 @@ function quizWithHints(radio, fbId, isCorrect, mainMsg, hint1, hint2) {
     }
 }
 
-/* ---------------------------- ΕΓΓΡΑΦΗ ---------------------------- */
+/* ---------------------------- ΛΟΓΑΡΙΑΣΜΟΙ (Firebase Authentication) ----------------------------
+   Οι λογαριασμοί δημιουργούνται και ελέγχονται στους διακομιστές της Google.
+   Ο κωδικός δεν αποθηκεύεται στον υπολογιστή του χρήστη και δεν μπορεί να
+   παρακαμφθεί από τον browser. Ένα email αντιστοιχεί σε έναν μόνο λογαριασμό.
+   ------------------------------------------------------------------------------- */
+let FAUTH = null, CURRENT_UID = null;
+const PROGRESS_KEYS = ['elearningCompleted', 'examResult', 'examAttempts', 'planActions'];
 
-function checkRegistration() {
-    const user = JSON.parse(localStorage.getItem('elearningUser'));
-    if (user && user.firstname && user.pwHash && sessionStorage.getItem('elearningLoggedIn') !== '1') {
-        document.getElementById('registration-card').style.display = 'none';
-        document.getElementById('welcome-user-card').style.display = 'none';
-        document.getElementById('login-card').style.display = 'block';
-        document.getElementById('login-name').textContent = user.firstname + ' ' + (user.lastname || '');
-        return;
+const AUTH_CARDS = { loading:'auth-loading', register:'registration-card', login:'login-card', welcome:'welcome-user-card', offline:'auth-offline' };
+function showAuthCard(which) {
+    Object.keys(AUTH_CARDS).forEach(k => {
+        const el = document.getElementById(AUTH_CARDS[k]);
+        if (el) el.style.display = 'none';
+    });
+    const el = document.getElementById(AUTH_CARDS[which]);
+    if (el) el.style.display = 'block';
+    authMsg('reg-msg', '', false);
+    authMsg('login-msg', '', false);
+}
+function authMsg(id, text, isError) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    if (!text) { el.className = 'feedback'; el.innerHTML = ''; return; }
+    el.innerHTML = text;
+    el.className = 'feedback show' + (isError ? ' wrong' : '');
+}
+function authErrorText(e) {
+    switch (e && e.code) {
+        case 'auth/email-already-in-use':   return 'Υπάρχει ήδη λογαριασμός με αυτό το email. Πατήστε «Σύνδεση», ή «Ξέχασα τον κωδικό μου» αν δεν τον θυμάστε.';
+        case 'auth/invalid-email':          return 'Η διεύθυνση email δεν είναι έγκυρη.';
+        case 'auth/weak-password':          return 'Ο κωδικός είναι πολύ αδύναμος. Χρειάζονται τουλάχιστον 6 χαρακτήρες.';
+        case 'auth/missing-password':       return 'Συμπληρώστε τον κωδικό σας.';
+        case 'auth/wrong-password':
+        case 'auth/invalid-credential':
+        case 'auth/user-not-found':         return 'Λάθος email ή κωδικός.';
+        case 'auth/too-many-requests':      return 'Πολλές αποτυχημένες προσπάθειες. Δοκιμάστε ξανά σε λίγα λεπτά ή κάντε επαναφορά κωδικού.';
+        case 'auth/network-request-failed': return 'Δεν υπάρχει σύνδεση με τον διακομιστή. Ελέγξτε τη σύνδεσή σας στο διαδίκτυο.';
+        case 'auth/operation-not-allowed':  return 'Ο συγκεκριμένος τρόπος σύνδεσης δεν είναι ενεργοποιημένος στο Firebase.';
+        case 'auth/account-exists-with-different-credential':
+                                            return 'Υπάρχει ήδη λογαριασμός με αυτό το email, που είχε δημιουργηθεί με κωδικό. Συνδεθείτε με email και κωδικό.';
+        case 'auth/popup-blocked':          return 'Ο browser μπλόκαρε το παράθυρο της Google. Επιτρέψτε τα αναδυόμενα παράθυρα για αυτή τη σελίδα και δοκιμάστε ξανά.';
+        case 'auth/unauthorized-domain':    return 'Η διεύθυνση αυτής της σελίδας δεν είναι καταχωρημένη στο Firebase (Authentication → Settings → Authorized domains).';
+        default: return 'Κάτι πήγε στραβά. Δοκιμάστε ξανά.' + (e && e.code ? ' (' + e.code + ')' : '');
     }
-    if (user && user.firstname) {
-        document.getElementById('registration-card').style.display = 'none';
-        document.getElementById('login-card').style.display = 'none';
-        document.getElementById('welcome-user-card').style.display = 'block';
-        document.getElementById('display-username').textContent = user.firstname;
+}
+/* Η πρόοδος παραμένει τοπική, αλλά κρατιέται χωριστά για κάθε λογαριασμό,
+   ώστε δύο εκπαιδευόμενοι στον ίδιο υπολογιστή να μην μπερδεύονται. */
+function stashProgress(uid) {
+    if (!uid) return;
+    const o = {};
+    PROGRESS_KEYS.forEach(k => { const v = localStorage.getItem(k); if (v !== null) o[k] = v; });
+    localStorage.setItem('progress_' + uid, JSON.stringify(o));
+}
+function loadProgress(uid) {
+    const raw = localStorage.getItem('progress_' + uid);
+    if (raw === null) {
+        if (localStorage.getItem('elearningUid') === null) stashProgress(uid);
+        else PROGRESS_KEYS.forEach(k => localStorage.removeItem(k));
+    } else {
+        PROGRESS_KEYS.forEach(k => localStorage.removeItem(k));
+        try { const o = JSON.parse(raw); Object.keys(o).forEach(k => localStorage.setItem(k, o[k])); } catch (e) {}
+    }
+    localStorage.setItem('elearningUid', uid);
+    completed = JSON.parse(localStorage.getItem('elearningCompleted') || '{}');
+}
+function applyAuthUI(user) {
+    if (user) {
+        if (CURRENT_UID && CURRENT_UID !== user.uid) stashProgress(CURRENT_UID);
+        if (CURRENT_UID !== user.uid) loadProgress(user.uid);
+        CURRENT_UID = user.uid;
+        const parts = (user.displayName || '').trim().split(/\s+/).filter(Boolean);
+        const fn = parts[0] || 'Εκπαιδευόμενος/η';
+        const ln = parts.slice(1).join(' ');
+        localStorage.setItem('elearningUser', JSON.stringify({ firstname: fn, lastname: ln, email: user.email || '', uid: user.uid }));
+        showAuthCard('welcome');
+        document.getElementById('display-username').textContent = fn;
+        const de = document.getElementById('display-email');
+        if (de) de.textContent = user.email || '';
         completed['home'] = true;
         localStorage.setItem('elearningCompleted', JSON.stringify(completed));
         updateProgress();
+        renderPlan();
+    } else {
+        if (CURRENT_UID) stashProgress(CURRENT_UID);
+        CURRENT_UID = null;
+        localStorage.removeItem('elearningUser');
+        PROGRESS_KEYS.forEach(k => localStorage.removeItem(k));
+        completed = {};
+        showAuthCard('register');
+        updateProgress();
+        renderPlan();
+        showPage('home');
     }
-}
-
-async function hashPw(s) {
-    if (window.crypto && crypto.subtle && window.isSecureContext) {
-        const d = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(s));
-        return Array.from(new Uint8Array(d)).map(b => b.toString(16).padStart(2, '0')).join('');
-    }
-    let h = 5381;
-    for (let i = 0; i < s.length; i++) { h = ((h << 5) + h + s.charCodeAt(i)) >>> 0; }
-    return 'x' + h.toString(16);
 }
 async function registerUser() {
     const fn = document.getElementById('reg-firstname').value.trim();
     const ln = document.getElementById('reg-lastname').value.trim();
     const em = document.getElementById('reg-email').value.trim();
-    const pw = document.getElementById('reg-password').value.trim();
-    if (fn && ln && em && pw) {
-        const pwHash = await hashPw(pw);
-        localStorage.setItem('elearningUser', JSON.stringify({ firstname: fn, lastname: ln, email: em, pwHash: pwHash }));
-        sessionStorage.setItem('elearningLoggedIn', '1');
-        checkRegistration();
-    } else {
-        alert('Παρακαλώ συμπληρώστε όλα τα πεδία.');
+    const pw = document.getElementById('reg-password').value;
+    authMsg('reg-msg', '', false);
+    if (!fn || !ln || !em || !pw) { authMsg('reg-msg', 'Παρακαλώ συμπληρώστε όλα τα πεδία.', true); return; }
+    if (pw.length < 6)            { authMsg('reg-msg', 'Ο κωδικός πρέπει να έχει τουλάχιστον 6 χαρακτήρες.', true); return; }
+    if (!FAUTH)                   { authMsg('reg-msg', 'Δεν υπάρχει σύνδεση με τον διακομιστή. Δοκιμάστε ξανά σε λίγο.', true); return; }
+    const btn = document.getElementById('reg-btn');
+    btn.disabled = true;
+    try {
+        const cred = await FAUTH.createUserWithEmailAndPassword(em, pw);
+        await cred.user.updateProfile({ displayName: fn + ' ' + ln });
+        document.getElementById('reg-password').value = '';
+        applyAuthUI(FAUTH.currentUser);
+    } catch (e) {
+        authMsg('reg-msg', authErrorText(e), true);
+    } finally {
+        btn.disabled = false;
     }
 }
 async function loginUser() {
-    const user = JSON.parse(localStorage.getItem('elearningUser'));
+    const em = document.getElementById('login-email').value.trim();
     const pw = document.getElementById('login-password').value;
-    if (!user) return;
-    const pwHash = await hashPw(pw);
-    if (!user.pwHash || pwHash === user.pwHash) {
-        sessionStorage.setItem('elearningLoggedIn', '1');
+    authMsg('login-msg', '', false);
+    if (!em || !pw) { authMsg('login-msg', 'Συμπληρώστε email και κωδικό.', true); return; }
+    if (!FAUTH)     { authMsg('login-msg', 'Δεν υπάρχει σύνδεση με τον διακομιστή. Δοκιμάστε ξανά σε λίγο.', true); return; }
+    const btn = document.getElementById('login-btn');
+    btn.disabled = true;
+    try {
+        await FAUTH.signInWithEmailAndPassword(em, pw);
         document.getElementById('login-password').value = '';
-        checkRegistration();
-    } else {
-        alert('Λάθος κωδικός. Δοκιμάστε ξανά.');
+    } catch (e) {
+        authMsg('login-msg', authErrorText(e), true);
+    } finally {
+        btn.disabled = false;
     }
 }
-
+async function resetPassword() {
+    const em = (document.getElementById('login-email').value || '').trim();
+    if (!em)    { authMsg('login-msg', 'Γράψτε πρώτα το email σας και μετά πατήστε «Ξέχασα τον κωδικό μου».', true); return; }
+    if (!FAUTH) { authMsg('login-msg', 'Δεν υπάρχει σύνδεση με τον διακομιστή.', true); return; }
+    try {
+        await FAUTH.sendPasswordResetEmail(em);
+        authMsg('login-msg', 'Σας στείλαμε email με οδηγίες για νέο κωδικό. Ελέγξτε και τον φάκελο ανεπιθύμητης αλληλογραφίας.', false);
+    } catch (e) {
+        authMsg('login-msg', authErrorText(e), true);
+    }
+}
+/* Μήνυμα στην κάρτα που είναι ορατή αυτή τη στιγμή. */
+function authMsgActive(text, isError) {
+    const loginVisible = document.getElementById('login-card').style.display === 'block';
+    authMsg(loginVisible ? 'login-msg' : 'reg-msg', text, isError);
+}
+async function signInWithGoogle() {
+    authMsgActive('', false);
+    if (!FAUTH) { authMsgActive('Δεν υπάρχει σύνδεση με τον διακομιστή. Δοκιμάστε ξανά σε λίγο.', true); return; }
+    const provider = new firebase.auth.GoogleAuthProvider();
+    provider.setCustomParameters({ prompt: 'select_account' });
+    try {
+        await FAUTH.signInWithPopup(provider);
+    } catch (e) {
+        const code = e && e.code;
+        if (code === 'auth/popup-closed-by-user' || code === 'auth/cancelled-popup-request') return;
+        if (code === 'auth/popup-blocked' || code === 'auth/operation-not-supported-in-this-environment') {
+            try { await FAUTH.signInWithRedirect(provider); return; }
+            catch (e2) { authMsgActive(authErrorText(e2), true); return; }
+        }
+        authMsgActive(authErrorText(e), true);
+    }
+}
 function logoutUser() {
-    sessionStorage.removeItem('elearningLoggedIn');
-    const lc = document.getElementById('login-card'); if (lc) lc.style.display = 'none';
-    ['elearningUser','elearningCompleted','examResult','examAttempts','planActions']
-        .forEach(k => localStorage.removeItem(k));
-    ['forum_intro','forum_mm1','forum_mm2'].forEach(k => localStorage.removeItem(k));
-    completed = {};
-    document.getElementById('welcome-user-card').style.display = 'none';
-    document.getElementById('registration-card').style.display = 'block';
-    ['reg-firstname','reg-lastname','reg-email','reg-password'].forEach(i => document.getElementById(i).value = '');
+    if (!FAUTH) return;
+    stashProgress(CURRENT_UID);
+    FAUTH.signOut();
+}
+function resetProgress() {
+    if (!confirm('Θα διαγραφεί η πρόοδός σας στο μάθημα, δηλαδή οι ολοκληρωμένες δραστηριότητες, το αποτέλεσμα της τελικής και το σχέδιο δράσης. Ο λογαριασμός σας παραμένει. Θέλετε να συνεχίσετε;')) return;
+    PROGRESS_KEYS.forEach(k => localStorage.removeItem(k));
+    if (CURRENT_UID) localStorage.removeItem('progress_' + CURRENT_UID);
+    completed = { home: true };
+    localStorage.setItem('elearningCompleted', JSON.stringify(completed));
+    if (CURRENT_UID) stashProgress(CURRENT_UID);
     updateProgress();
+    renderPlan();
     showPage('home');
 }
+window.addEventListener('beforeunload', () => stashProgress(CURRENT_UID));
 
 /* ---------------------------- FORUMS ---------------------------- */
 
@@ -2524,22 +2681,35 @@ const remotePosts = { intro: [], mm1: [], mm2: [] };
 const forumStatus = { intro: 'loading', mm1: 'loading', mm2: 'loading' };
 const autoMsgs    = { intro: '', mm1: '', mm2: '' };
 
+/* Μία αρχικοποίηση Firebase, για την ταυτοποίηση ΚΑΙ για το forum. */
+function initFirebase() {
+    if (typeof firebase === 'undefined') { showAuthCard('offline'); return false; }
+    try {
+        if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
+        FDB   = firebase.firestore();
+        FAUTH = firebase.auth();
+    } catch (e) {
+        showAuthCard('offline');
+        return false;
+    }
+    FAUTH.onAuthStateChanged(u => {
+        FUID = u ? u.uid : null;
+        applyAuthUI(u);
+        FTYPES.forEach(renderForum);
+    });
+    /* Αν η σύνδεση με Google έγινε με ανακατεύθυνση αντί για αναδυόμενο παράθυρο. */
+    FAUTH.getRedirectResult().catch(e => {
+        if (e && e.code) authMsgActive(authErrorText(e), true);
+    });
+    return true;
+}
+
 function initForums() {
     FTYPES.forEach(renderForum);
-    if (typeof firebase === 'undefined') {
+    if (!FDB) {
         FTYPES.forEach(f => { forumStatus[f] = 'offline'; renderForum(f); });
         return;
     }
-    try {
-        firebase.initializeApp(firebaseConfig);
-        FDB = firebase.firestore();
-    } catch (e) {
-        FTYPES.forEach(f => { forumStatus[f] = 'offline'; renderForum(f); });
-        return;
-    }
-
-    firebase.auth().onAuthStateChanged(u => { FUID = u ? u.uid : null; FTYPES.forEach(renderForum); });
-    firebase.auth().signInAnonymously().catch(() => { FUID = null; });
 
     FTYPES.forEach(ftype => {
         FDB.collection(COLL[ftype]).orderBy('ts', 'asc').onSnapshot(
@@ -2597,7 +2767,7 @@ function submitForum(ftype) {
     const text = input.value.trim();
     if (!text) return;
     if (text.length > 1200) { alert('Η ανάρτηση είναι πολύ μεγάλη. Μέγιστο 1200 χαρακτήρες.'); return; }
-    if (!FDB || !FUID) { alert('Δεν υπάρχει σύνδεση με τον διακομιστή του forum. Δοκιμάστε ξανά σε λίγο.'); return; }
+    if (!FDB || !FUID) { alert('Δεν είστε συνδεδεμένος/η ή δεν υπάρχει σύνδεση με τον διακομιστή. Ανανεώστε τη σελίδα και δοκιμάστε ξανά.'); return; }
 
     const user = JSON.parse(localStorage.getItem('elearningUser'));
     const authorName = (user && user.firstname)
@@ -3149,7 +3319,8 @@ function renderCertificate() {
 window.onload = () => {
     buildSidebar();
     updateProgress();
-    checkRegistration();
+    showAuthCard('loading');
+    initFirebase();
     initForums();
     renderPlan();
     if (!document.querySelector('.page.active')) showPage('home');
